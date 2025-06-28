@@ -3,7 +3,10 @@
 
 int main(void)
 {
-    PhoneBook repertoire;
+	PhoneBook repertoire;
+	std::string name = "romain";
 
-    return (0);
+	std::cout << repertoire.get_contact(0, name).get_firstName() << std::endl;
+
+	return (0);
 }

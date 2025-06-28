@@ -4,7 +4,8 @@ DEBUG_FLAGS = -g
 
 NAME = repertoire
 SRC = main.cpp \
-	PhoneBook.cpp
+	PhoneBook.cpp \
+	Contact.cpp
 
 OBJ_DIR = objs
 OBJ = $(SRC:.cpp=.o)
