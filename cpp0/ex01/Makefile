@@ -2,8 +2,9 @@ CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 DEBUG_FLAGS = -g
 
-NAME = phonebook
-SRC = phonebook.cpp
+NAME = repertoire
+SRC = main.cpp \
+	PhoneBook.cpp
 
 OBJ_DIR = objs
 OBJ = $(SRC:.cpp=.o)
