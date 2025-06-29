@@ -8,10 +8,15 @@ class PhoneBook
 public :
 	PhoneBook(void);
 	~PhoneBook(void);
-	Contact	get_contact(int index, std::string str);
+	void	add();
+	void	search();
 
 private:
-	Contact contacts[8];
+	Contact _contacts[8];
+	int		_index;
+	int		_get_index() const;
+	void	_increment_index();
+	void	_display_phonebook() const;
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "Contact.hpp"
 
 Contact::Contact()
@@ -13,55 +14,36 @@ Contact::~Contact()
 
 std::string Contact::get_firstName() const
 {
-	return (this->_firstName);
+	return this->_firstName;
 }
 
 std::string Contact::get_lastName() const
 {
-	return (this->_lastName);
+	return this->_lastName;
 }
 
 std::string Contact::get_nickName() const
 {
-	return (this->_nickName);
+	return this->_nickName;
 }
 
 std::string Contact::get_phoneNumber() const
 {
-	return (this->_phoneNumber);
+	return this->_phoneNumber;
 }
 
 std::string Contact::get_darkestSecret() const
 {
-	return (this->_darkestSecret);
+	return this->_darkestSecret;
 }
 
-void Contact::set_firstName(std::string str)
+void	Contact::set_contact(std::string firstName, std::string lastName, std::string nickName,
+			std::string phoneNumber, std::string secret)
 {
-	this->_firstName = str;
-	return;
-}
-
-void Contact::set_lastName(std::string str)
-{
-	this->_lastName = str;
-	return;
-}
-
-void Contact::set_nickName(std::string str)
-{
-	this->_nickName = str;
-	return;
-}
-
-void Contact::set_phoneNumber(std::string str)
-{
-	this->_phoneNumber = str;
-	return;
-}
-
-void Contact::set_darkestSecret(std::string str)
-{
-	this->_darkestSecret = str;
+	this->_firstName = firstName;
+	this->_lastName = lastName;
+	this->_nickName = nickName;
+	this->_phoneNumber = phoneNumber;
+	this->_darkestSecret = secret;
 	return;
 }

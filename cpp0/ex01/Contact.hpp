@@ -13,11 +13,8 @@ public:
 	std::string	get_phoneNumber() const;
 	std::string	get_darkestSecret() const;
 
-	void	set_firstName(std::string str);
-	void	set_lastName(std::string str);
-	void	set_nickName(std::string str);
-	void	set_phoneNumber(std::string str);
-	void	set_darkestSecret(std::string str);
+	void	set_contact(std::string firstName, std::string lastName, std::string nickName,
+			std::string phoneNumber, std::string secret);
 
 private:
 	std::string	_firstName;

@@ -2,7 +2,6 @@
 
 int	main(int argc, char **argv)
 {
-	char	letter;
 	int		j;
 
 	if (argc == 1)
@@ -11,12 +10,11 @@ int	main(int argc, char **argv)
 	{
 		for (int i = 1; i < argc; i++)
 		{
+			std::string arg = argv[i];
 			j = -1;
-			while (argv[i][++j])
-			{
-				letter = toupper(argv[i][j]);
-				std::cout << letter;
-			}
+			while (arg[++j])
+				arg[j] = toupper(arg[j]);
+			std::cout << arg;
 		}
 		std::cout << std::endl;
 	}
