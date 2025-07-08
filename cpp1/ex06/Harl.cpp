@@ -72,7 +72,8 @@ void	Harl::complain(std::string level)
 		case 4:
 			this->error();
 			std::cout << std::endl;
+			break;
+		default:
+			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 	}
-	if (index == 0)
-		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 }

@@ -63,6 +63,7 @@ void	File::modifyBuffer()
 		{
 			this->_buffer.erase(i, this->_s1.length());
 			this->_buffer.insert(i, this->_s2);
+			i += this->_s2.length();
 		}
 	}
 }
