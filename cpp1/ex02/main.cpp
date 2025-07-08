@@ -9,7 +9,7 @@ int	main()
 
 	//	MEMORY ADRESSES
 	std::cout << "memory address of the string variable : " << &var << std::endl;
-	std::cout << "memory address held by stringPTR :      " << &stringPTR << std::endl;
+	std::cout << "memory address held by stringPTR :      " << stringPTR << std::endl;
 	std::cout << "memory address held by stringREF :      " << &stringREF << std::endl;
 
 	std::cout << std::endl;

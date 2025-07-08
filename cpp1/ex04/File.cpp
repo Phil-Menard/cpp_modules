@@ -59,7 +59,7 @@ void	File::modifyBuffer()
 {
 	for (std::size_t i = 0; i < this->_buffer.length(); i++)
 	{
-		if (this->_buffer.compare(i, this->_s1.length(), this->_s1) == 0)
+		if (this->_s1 != "" && this->_buffer.compare(i, this->_s1.length(), this->_s1) == 0)
 		{
 			this->_buffer.erase(i, this->_s1.length());
 			this->_buffer.insert(i, this->_s2);
