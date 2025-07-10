@@ -23,4 +23,6 @@ class Fixed
 		static const int	_bits;
 };
 
+std::ostream & operator<<(std::ostream & o, Fixed const & new_fixed);
+
 #endif
