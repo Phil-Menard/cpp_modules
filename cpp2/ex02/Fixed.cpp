@@ -5,30 +5,25 @@ const int Fixed::_bits = 8;
 
 Fixed::Fixed() : _fixed(0)
 {
-	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(Fixed const & copy)
 {
-	std::cout << "Copy constructeur called" << std::endl;
 	*this = copy;
 }
 
 Fixed::Fixed(int const n)
 {
-	std::cout << "Int constructor called" << std::endl;
 	this->_fixed = n << _bits;
 }
 
 Fixed::Fixed(float const f)
 {
-	std::cout << "Float constructor called" << std::endl;
 	this->_fixed = roundf(f * (1 << _bits));
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
 }
 
 int	Fixed::getRawBits() const
@@ -51,65 +46,113 @@ int	Fixed::toInt() const
 	return this->_fixed >> _bits;
 }
 
-Fixed & Fixed::operator=(Fixed const & new_fixed)
+Fixed & Fixed::operator=(Fixed const & other)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->_fixed = new_fixed.getRawBits();
+	this->_fixed = other.getRawBits();
 	return *this;
 }
 
-bool Fixed::operator>(Fixed const & new_fixed) const
+std::ostream & operator<<(std::ostream & o, Fixed const & other)
 {
-	return this->_fixed > new_fixed._fixed;
-}
-
-bool Fixed::operator<(Fixed const & new_fixed) const
-{
-	return this->_fixed < new_fixed._fixed;
-}
-
-bool Fixed::operator>=(Fixed const & new_fixed) const
-{
-	return this->_fixed >= new_fixed._fixed;
-}
-
-bool Fixed::operator<=(Fixed const & new_fixed) const
-{
-	return this->_fixed <= new_fixed._fixed;
-}
-
-bool Fixed::operator==(Fixed const & new_fixed) const
-{
-	return this->_fixed == new_fixed._fixed;
-}
-
-bool Fixed::operator!=(Fixed const & new_fixed) const
-{
-	return this->_fixed != new_fixed._fixed;
-}
-
-Fixed	Fixed::operator+(Fixed const & new_fixed) const
-{
-	return this->toFloat() + new_fixed.toFloat();
-}
-
-Fixed	Fixed::operator-(Fixed const & new_fixed) const
-{
-	return this->toFloat() - new_fixed.toFloat();
-}
-
-Fixed	Fixed::operator*(Fixed const & new_fixed) const
-{
-	return this->toFloat() * new_fixed.toFloat();
-}
-
-Fixed	Fixed::operator/(Fixed const & new_fixed) const
-{
-	return this->toFloat() / new_fixed.toFloat();
-}
-
-std::ostream & operator<<(std::ostream & o, Fixed const & new_fixed)
-{
-	o << new_fixed.toFloat();
+	o << other.toFloat();
 	return o;
+}
+
+/**=================================================================
+ *!                      OPERATEUR DE COMPARAISON
+ *==================================================================**/
+
+bool Fixed::operator>(Fixed const & other) const
+{
+	return this->_fixed > other._fixed;
+}
+
+bool Fixed::operator<(Fixed const & other) const
+{
+	return this->_fixed < other._fixed;
+}
+
+bool Fixed::operator>=(Fixed const & other) const
+{
+	return this->_fixed >= other._fixed;
+}
+
+bool Fixed::operator<=(Fixed const & other) const
+{
+	return this->_fixed <= other._fixed;
+}
+
+bool Fixed::operator==(Fixed const & other) const
+{
+	return this->_fixed == other._fixed;
+}
+
+bool Fixed::operator!=(Fixed const & other) const
+{
+	return this->_fixed != other._fixed;
+}
+
+/**=================================================================
+ *!                      OPERATEURS D'ARITHMETIQUES
+ *==================================================================**/
+
+Fixed	Fixed::operator+(Fixed const & other) const
+{
+	Fixed a(this->toFloat() + other.toFloat());
+	return a;
+}
+
+Fixed	Fixed::operator-(Fixed const & other) const
+{
+	Fixed a(this->toFloat() - other.toFloat());
+	return a;
+}
+
+Fixed	Fixed::operator*(Fixed const & other) const
+{
+	Fixed a(this->toFloat() * other.toFloat());
+	return a;
+}
+
+Fixed	Fixed::operator/(Fixed const & other) const
+{
+	Fixed a(this->toFloat() / other.toFloat());
+	return a;
+}
+
+/**=================================================================
+ *!       OPERATEURS D'INCREMENTATIONS ET DE DECREMENTATIONS
+ *==================================================================**/
+
+/*
+		Fixed& operator++();
+		Fixed operator++(int);
+		Fixed& operator++();
+		Fixed operator++(int);
+*/
+
+Fixed & Fixed::operator++()
+{	
+	this->_fixed++;
+	return *this;
+} 
+
+Fixed Fixed::operator++(int)
+{
+	Fixed temp = *this;
+	++*this;
+	return temp;
+}
+
+Fixed & Fixed::operator--()
+{
+	this->_fixed--;
+	return *this;
+} 
+
+Fixed Fixed::operator--(int)
+{
+	Fixed temp = *this;
+	++*this;
+	return temp;
 }

@@ -11,21 +11,27 @@ class Fixed
 		Fixed(int const n);
 		Fixed(float const f);
 		~Fixed();
-		Fixed & operator=(Fixed const & new_fixed);
+		Fixed & operator=(Fixed const & other);
 
 		//OPERATEUR DE COMPARAISON
-		bool operator>(Fixed const & new_fixed) const;
-		bool operator<(Fixed const & new_fixed) const;
-		bool operator<=(Fixed const & new_fixed) const;
-		bool operator>=(Fixed const & new_fixed) const;
-		bool operator!=(Fixed const & new_fixed) const;
-		bool operator==(Fixed const & new_fixed) const;
+		bool operator>(Fixed const & other) const;
+		bool operator<(Fixed const & other) const;
+		bool operator<=(Fixed const & other) const;
+		bool operator>=(Fixed const & other) const;
+		bool operator!=(Fixed const & other) const;
+		bool operator==(Fixed const & other) const;
 
-		//OPERATEURS DE ARITHMETIQUES
-		Fixed operator+(Fixed const & new_fixed) const;
-		Fixed operator-(Fixed const & new_fixed) const;
-		Fixed operator*(Fixed const & new_fixed) const;
-		Fixed operator/(Fixed const & new_fixed) const;
+		//OPERATEURS D'ARITHMETIQUES
+		Fixed operator+(Fixed const & other) const;
+		Fixed operator-(Fixed const & other) const;
+		Fixed operator*(Fixed const & other) const;
+		Fixed operator/(Fixed const & other) const;
+
+		//OPERATEURS D'INCREMENTATIONS ET DE DECREMENTATIONS
+		Fixed& operator++();
+		Fixed operator++(int);
+		Fixed& operator--();
+		Fixed operator--(int);
 
 		int		getRawBits() const;
 		void	setRawBits(int const raw);
@@ -37,6 +43,6 @@ class Fixed
 		static const int	_bits;
 };
 
-std::ostream & operator<<(std::ostream & o, Fixed const & new_fixed);
+std::ostream & operator<<(std::ostream & o, Fixed const & other);
 
 #endif
