@@ -28,10 +28,16 @@ class Fixed
 		Fixed operator/(Fixed const & other) const;
 
 		//OPERATEURS D'INCREMENTATIONS ET DE DECREMENTATIONS
-		Fixed& operator++();
-		Fixed operator++(int);
-		Fixed& operator--();
-		Fixed operator--(int);
+		Fixed& operator++(); //pre incrementation
+		Fixed operator++(int); //post incrementation
+		Fixed& operator--(); // pre decrementation
+		Fixed operator--(int); // post decrementation
+
+		//FONCTIONS MIN ET MAX
+		static Fixed min(Fixed & a, Fixed & b);
+		static Fixed min(Fixed const & a, Fixed const & b);
+		static Fixed max(Fixed & a, Fixed & b);
+		static Fixed max(Fixed const & a, Fixed const & b);
 
 		int		getRawBits() const;
 		void	setRawBits(int const raw);

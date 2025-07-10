@@ -156,3 +156,39 @@ Fixed Fixed::operator--(int)
 	++*this;
 	return temp;
 }
+
+/**=================================================================
+ *!                     FONCTIONS MIN ET MAX
+ *==================================================================**/
+
+Fixed Fixed::min(Fixed & a, Fixed & b)
+{
+	if (a < b)
+		return a;
+	else
+		return b;
+}
+
+Fixed Fixed::min(Fixed const & a, Fixed const & b)
+{
+	if (a < b)
+		return a;
+	else
+		return b;
+}
+
+Fixed Fixed::max(Fixed & a, Fixed & b)
+{
+	if (a > b)
+		return a;
+	else
+		return b;
+}
+
+Fixed Fixed::max(Fixed const & a, Fixed const & b)
+{
+	if (a > b)
+		return a;
+	else
+		return b;
+}
