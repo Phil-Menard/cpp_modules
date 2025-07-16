@@ -2,22 +2,25 @@
 
 Point::Point() : x(0), y(0)
 {
-
 }
 
-Point::Point(Point const & copy)
+Point::Point(Point const & copy) : x(copy.x), y(copy.y)
 {
-	*this = copy;
 }
 
 Point::Point(float const a, float const b) : x(a), y(b)
 {
-
 }
 
 Point::~Point()
 {
+}
 
+//don't do anything because x and y are const
+Point & Point::operator=(Point const & other)
+{
+	(void) other;
+	return *this;
 }
 
 Fixed Point::getX() const
@@ -28,15 +31,4 @@ Fixed Point::getX() const
 Fixed Point::getY() const
 {
 	return this->y;
-}
-
-Point & Point::operator=(Point const & other)
-{
-	(void) other;
-	return *this;
-}
-
-void Point::setVectors(Point a, Point b)
-{
-	
 }

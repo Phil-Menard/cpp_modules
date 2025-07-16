@@ -15,17 +15,11 @@ class Point
 
 		Fixed getX() const;
 		Fixed getY() const;
-		void setVectors(Point a, Point b);
 
 	private:
 		const Fixed x;
 		const Fixed y;
 
-		struct vectors
-		{
-			Point a;
-			Point b;
-		};
 };
 
 #endif
