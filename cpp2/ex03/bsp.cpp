@@ -34,5 +34,28 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 	y = point.getY() - c.getY();
 	Point vectCP(x.toFloat(), y.toFloat());
 
-	return true;
+	//AB X AP
+	Fixed resA = (vectAB.getX() * vectAP.getY()) - (vectAB.getY() * vectAP.getX());
+
+	//BC X BP
+	Fixed resB = (vectBC.getX() * vectBP.getY()) - (vectBC.getY() * vectBP.getX());
+
+	//CA X CP
+	Fixed resC = (vectCA.getX() * vectCP.getY()) - (vectCA.getY() * vectCP.getX());
+
+	if ((resA > 0 && resB > 0 && resC > 0) || (resA < 0 && resB < 0 && resC < 0))
+	{
+		std::cout << "The point is inside the triangle." << std::endl;
+		return true;
+	}
+	else if (resA == 0 || resB == 0 || resC == 0)
+	{
+		std::cout << "The point is on an edge." << std::endl;
+		return false;
+	}
+	else
+	{
+		std::cout << "The point is outside the triangle." << std::endl;
+		return false;
+	}
 }

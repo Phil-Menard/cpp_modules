@@ -9,9 +9,18 @@ int	main()
 	Point const a(1.0f, 1.0f);
 	Point const b(4.0f, 1.0f);
 	Point const c(2.0f, 4.0f);
-	Point const p(2.0f, 2.0f);
 
-	bsp(a, b, c, p);
+	//POINT INSIDE
+	Point const p1(2.0f, 2.0f);
+	bsp(a, b, c, p1);
+
+	//POINT OUTSIDE
+	Point const p2(0.0f, 0.0f);
+	bsp(a, b, c, p2);
+
+	//POINT ON EDGE
+	Point const p3(2.5f, 1.0f);
+	bsp(a, b, c, p3);
 
 	return 0;
 }

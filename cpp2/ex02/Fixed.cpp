@@ -124,13 +124,6 @@ Fixed	Fixed::operator/(Fixed const & other) const
  *!       OPERATEURS D'INCREMENTATIONS ET DE DECREMENTATIONS
  *==================================================================**/
 
-/*
-		Fixed& operator++();
-		Fixed operator++(int);
-		Fixed& operator++();
-		Fixed operator++(int);
-*/
-
 Fixed & Fixed::operator++()
 {	
 	this->_fixed++;
