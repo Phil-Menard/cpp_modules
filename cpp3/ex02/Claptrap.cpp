@@ -1,15 +1,20 @@
 #include "Claptrap.hpp"
 
+Claptrap::Claptrap()
+{
+	std::cout << "Default Claptrap constructor called." << std::endl;
+}
+
 Claptrap::Claptrap(std::string name) : _name(name), _hitPoints(10),
 									_energyPoints(10), _attackDamage(0)
 {
-	std::cout << "Default Claptrap constructor called." << std::endl;
+	std::cout << "Claptrap name constructor called." << std::endl;
 }
 
 Claptrap::Claptrap(std::string name, int hitPoints, unsigned int energy, unsigned int damage) :
 _name(name), _hitPoints(hitPoints), _energyPoints(energy), _attackDamage(damage)
 {
-	std::cout << "Second Claptrap constructor called." << std::endl;
+	std::cout << "Claptrap name, hit points, energy and attack damage constructor called." << std::endl;
 }
 
 Claptrap::Claptrap(Claptrap const & other)

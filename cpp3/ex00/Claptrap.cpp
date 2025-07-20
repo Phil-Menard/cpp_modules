@@ -1,20 +1,25 @@
 #include "Claptrap.hpp"
 
+Claptrap::Claptrap()
+{
+	std::cout << "Default Claptrap constructor called." << std::endl;
+}
+
 Claptrap::Claptrap(std::string name) : _name(name), _hitPoints(10),
 									_energyPoints(10), _attackDamage(0)
 {
-	std::cout << "Default constructor called." << std::endl;
+	std::cout << "Claptrap name constructor called." << std::endl;
 }
 
 Claptrap::Claptrap(Claptrap const & other)
 {
-	std::cout << "Copy constructor called." << std::endl;
+	std::cout << "Claptrap copy constructor called." << std::endl;
 	*this = other;
 }
 
 Claptrap & Claptrap::operator=(Claptrap const & other)
 {
-	std::cout << "Affectation operator called." << std::endl;
+	std::cout << "Claptrap affectation operator called." << std::endl;
 	this->_name = other._name;
 	this->_hitPoints = other._hitPoints;
 	this->_energyPoints = other._energyPoints;
@@ -24,7 +29,7 @@ Claptrap & Claptrap::operator=(Claptrap const & other)
 
 Claptrap::~Claptrap()
 {
-	std::cout << "Destructor called." << std::endl;
+	std::cout << "Claptrap destructor called." << std::endl;
 }
 
 std::string	Claptrap::getName() const

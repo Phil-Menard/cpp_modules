@@ -6,11 +6,12 @@
 class Claptrap
 {
 	public:
+		Claptrap();
 		Claptrap(std::string name);
 		Claptrap(std::string name, int hitPoints, unsigned int energy, unsigned int damage);
 		Claptrap(Claptrap const & other);
-		~Claptrap();
 		Claptrap & operator=(Claptrap const & other);
+		~Claptrap();
 
 		std::string	getName() const;
 

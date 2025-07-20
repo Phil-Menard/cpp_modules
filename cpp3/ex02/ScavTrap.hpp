@@ -6,7 +6,10 @@
 class ScavTrap : public Claptrap
 {
 	public:
+		ScavTrap();
 		ScavTrap(std::string name);
+		ScavTrap(ScavTrap const & copy);
+		ScavTrap & operator=(ScavTrap const & other);
 		~ScavTrap();
 
 		void	attack(const std::string& target);

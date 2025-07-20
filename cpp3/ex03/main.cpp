@@ -48,5 +48,15 @@ int main()
 	diamondtrap.whoAmI();
 
 	std::cout << std::endl;
+	DiamondTrap diamondtrap2(diamondtrap);
+	std::cout << std::endl;
+
+	//USE OF MANDATORY FUNCTIONS
+	diamondtrap2.attack("Roland");
+	diamondtrap2.takeDamage(2);
+	diamondtrap2.beRepaired(2);
+	diamondtrap2.whoAmI();
+
+	std::cout << std::endl;
 	return 0;
 }
