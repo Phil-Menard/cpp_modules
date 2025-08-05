@@ -3,21 +3,23 @@
 
 #include <iostream>
 
-class Claptrap
+class ClapTrap
 {
 	public:
-		Claptrap();
-		Claptrap(std::string name);
-		Claptrap(std::string name, int hitPoints, unsigned int energy, unsigned int damage);
-		Claptrap(Claptrap const & other);
-		~Claptrap();
-		Claptrap & operator=(Claptrap const & other);
+		ClapTrap();
+		ClapTrap(std::string name);
+		ClapTrap(std::string name, int hitPoints, unsigned int energy, unsigned int damage);
+		ClapTrap(ClapTrap const & other);
+		~ClapTrap();
+		ClapTrap & operator=(ClapTrap const & other);
 
 		std::string	getName() const;
 
 		void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
+
+		void	displayEnergy();
 
 	protected:
 		std::string		_name;

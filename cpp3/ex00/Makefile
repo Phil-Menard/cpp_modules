@@ -4,7 +4,7 @@ DEBUG_FLAGS = -g
 
 NAME = claptrap
 SRC = main.cpp \
-	Claptrap.cpp
+	ClapTrap.cpp
 
 OBJ_DIR = objs
 OBJ = $(SRC:.cpp=.o)

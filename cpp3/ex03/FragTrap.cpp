@@ -8,12 +8,12 @@ FragTrap::FragTrap()
 	std::cout << "Default FragTrap constructor called." << std::endl;
 }
 
-FragTrap::FragTrap(std::string name) : Claptrap(name, FragTrap::_hitPoints, 100, FragTrap::_attackDamage)
+FragTrap::FragTrap(std::string name) : ClapTrap(name, FragTrap::_hitPoints, 100, FragTrap::_attackDamage)
 {
 	std::cout << "FragTrap name constructor called." << std::endl;
 }
 
-FragTrap::FragTrap(FragTrap const & copy) : Claptrap(copy)
+FragTrap::FragTrap(FragTrap const & copy) : ClapTrap(copy)
 {
 	std::cout << "Copy FragTrap constructor called." << std::endl;
 }

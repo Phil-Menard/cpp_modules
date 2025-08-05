@@ -3,7 +3,7 @@
 
 int	main()
 {
-	Fixed a(5);
+	Fixed a;
 	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 
 	std::cout << "a   : " << a << std::endl;
@@ -15,7 +15,7 @@ int	main()
 	std::cout << "max : " << Fixed::max( a, b ) << std::endl;
 	std::cout << "min : " << Fixed::min( a, b ) << std::endl;
 	std::cout << "a*b : " << a * b << std::endl;
-	std::cout << "a/b : " << a + b << std::endl;
+	std::cout << "b/a : " << b / a << std::endl;
 
 	return 0;
 }

@@ -4,7 +4,7 @@ DEBUG_FLAGS = -g
 
 NAME = diamondtrap
 SRC = main.cpp \
-	Claptrap.cpp \
+	ClapTrap.cpp \
 	ScavTrap.cpp \
 	FragTrap.cpp \
 	DiamondTrap.cpp

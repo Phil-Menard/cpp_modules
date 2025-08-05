@@ -1,9 +1,9 @@
 #ifndef SCAVTRAP_HPP
 # define SCAVTRAP_HPP
 
-#include "Claptrap.hpp"
+#include "ClapTrap.hpp"
 
-class ScavTrap : virtual public Claptrap
+class ScavTrap : virtual public ClapTrap
 {
 	public:
 		ScavTrap();
@@ -16,7 +16,7 @@ class ScavTrap : virtual public Claptrap
 		void	guardGate();
 
 	protected:
-		static unsigned int _energyPoints;
+		static const unsigned int _defaultEnergyPoints;
 };
 
 #endif

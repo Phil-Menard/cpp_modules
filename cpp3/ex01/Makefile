@@ -4,7 +4,7 @@ DEBUG_FLAGS = -g
 
 NAME = scavtrap
 SRC = main.cpp \
-	Claptrap.cpp \
+	ClapTrap.cpp \
 	ScavTrap.cpp
 
 OBJ_DIR = objs

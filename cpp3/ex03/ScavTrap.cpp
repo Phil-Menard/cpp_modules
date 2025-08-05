@@ -1,18 +1,18 @@
 #include "ScavTrap.hpp"
 
-unsigned int ScavTrap::_energyPoints = 50;
+const unsigned int ScavTrap::_defaultEnergyPoints = 50;
 
 ScavTrap::ScavTrap()
 {
 	std::cout << "Default ScavTrap constructor called." << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : Claptrap(name, 100, ScavTrap::_energyPoints, 20)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20)
 {
 	std::cout << "ScavTrap name constructor called." << std::endl;
 }
 
-ScavTrap::ScavTrap(ScavTrap const & copy) : Claptrap(copy)
+ScavTrap::ScavTrap(ScavTrap const & copy) : ClapTrap(copy)
 {
 	std::cout << "Copy ScavTrap constructor called." << std::endl;
 }
