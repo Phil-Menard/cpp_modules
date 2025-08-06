@@ -19,7 +19,8 @@ WrongAnimal::WrongAnimal(WrongAnimal const & copy)
 WrongAnimal & WrongAnimal::operator=(WrongAnimal const & other)
 {
 	std::cout << "Affectation WrongAnimal operator called." << std::endl;
-	this->type = other.type;
+	if (this != &other)
+		this->type = other.type;
 	return *this;
 }
 

@@ -14,7 +14,8 @@ WrongCat::WrongCat(WrongCat const & copy)
 WrongCat & WrongCat::operator=(WrongCat const & other)
 {
 	std::cout << "Affectation WrongCat operator called." << std::endl;
-	this->type = other.type;
+	if (this != &other)
+		this->type = other.type;
 	return *this;
 }
 

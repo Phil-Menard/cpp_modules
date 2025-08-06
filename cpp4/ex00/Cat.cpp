@@ -14,7 +14,8 @@ Cat::Cat(Cat const & copy)
 Cat & Cat::operator=(Cat const & other)
 {
 	std::cout << "Affectation Cat operator called." << std::endl;
-	this->type = other.type;
+	if (this != &other)
+		this->type = other.type;
 	return *this;
 }
 
