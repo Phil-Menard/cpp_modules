@@ -2,7 +2,7 @@ CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 DEBUG_FLAGS = -g
 
-NAME = animal
+NAME = brain
 SRC = main.cpp \
 	Animal.cpp \
 	Cat.cpp \
