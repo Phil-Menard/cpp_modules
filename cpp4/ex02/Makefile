@@ -2,9 +2,9 @@ CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 DEBUG_FLAGS = -g
 
-NAME = animal
+NAME = abstract
 SRC = main.cpp \
-	Animal.cpp \
+	AAnimal.cpp \
 	Cat.cpp \
 	Dog.cpp \
 	WrongAnimal.cpp \

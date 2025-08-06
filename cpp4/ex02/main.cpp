@@ -1,4 +1,4 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include "WrongAnimal.hpp"
@@ -8,7 +8,7 @@
 int main()
 {
 	int n = 10;
-	Animal *animals[n];
+	AAnimal *animals[n];
 
 	//CREATING THE OBJECTS IN ANIMAL ARRAY
 	for (int i = 0; i < n; i++)
@@ -40,8 +40,14 @@ int main()
 	Cat cat2(cat);
 	std::cout << std::endl;
 	Cat cat3 = cat2;
+	cat.makeSound();
+	cat2.makeSound();
+	cat3.makeSound();
 	
 	std::cout << std::endl;
+
+	//DOES NOT WORK AS AANIMAL IS AN ABSTRACT CLASS
+	// const AAnimal *animal = new AAnimal();
 	
 	return 0;
 }
