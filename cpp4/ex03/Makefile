@@ -7,7 +7,7 @@ SRC = main.cpp \
 	AMateria.cpp \
 	Cure.cpp \
 	Ice.cpp \
-	Character.cpp
+	ICharacter.cpp
 
 OBJ_DIR = objs
 OBJ = $(SRC:.cpp=.o)
