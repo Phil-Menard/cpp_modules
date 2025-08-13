@@ -17,17 +17,23 @@ class Bureaucrat
 		void incrementGrade();
 		void decrementGrade();
 
-		class GardeException : std::exception
+		class GradeTooHighException : public std::exception
 		{
 			public:
-				
+				virtual const char* what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
 		};
 
 	private:
 		std::string const _name;
 		int _grade;
-		void	GardeTooHighException();
-		void	GardeTooLowException();
 };
+
+std::ostream & operator<<(std::ostream & out, const Bureaucrat & name);
 
 #endif
