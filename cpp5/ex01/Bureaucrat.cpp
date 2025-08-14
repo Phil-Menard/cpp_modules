@@ -40,6 +40,15 @@ int Bureaucrat::getGrade() const
 	return this->_grade;
 }
 
+void Bureaucrat::signForm(Form & form)
+{
+	form.beSigned(*this);
+	if (form.getIsSigned())
+		std::cout << this->_name << " signed " << form.getName() << "." << std::endl;
+	else
+		std::cout << this->_name << " couldn't sign " << form.getName() << " because his/her grade is too low." << std::endl;
+}
+
 void Bureaucrat::incrementGrade()
 {
 	this->_grade--;

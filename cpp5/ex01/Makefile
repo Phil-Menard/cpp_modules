@@ -2,12 +2,10 @@ CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 DEBUG_FLAGS = -g
 
-NAME = abstract
+NAME = form
 SRC = main.cpp \
-	AMateria.cpp \
-	Cure.cpp \
-	Ice.cpp \
-	ICharacter.cpp
+	Bureaucrat.cpp \
+	Form.cpp
 
 OBJ_DIR = objs
 OBJ = $(SRC:.cpp=.o)
