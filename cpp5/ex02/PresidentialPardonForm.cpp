@@ -7,7 +7,8 @@ PresidentialPardonForm::PresidentialPardonForm(std::string target) :
 	AForm("Presidential Pardon", false, 25, 5), _target(target)
 {}
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const & copy)
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const & copy) :
+	AForm("Presidential Pardon", false, 25, 5)
 {
 	*this = copy;
 }
@@ -33,6 +34,6 @@ void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		throw;
 	}
 }

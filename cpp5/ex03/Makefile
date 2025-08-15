@@ -2,13 +2,14 @@ CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 DEBUG_FLAGS = -g
 
-NAME = form
+NAME = intern
 SRC = main.cpp \
 	Bureaucrat.cpp \
 	AForm.cpp \
 	ShrubberyCreationForm.cpp \
 	RobotomyRequestForm.cpp \
-	PresidentialPardonForm.cpp
+	PresidentialPardonForm.cpp \
+	Intern.cpp
 
 OBJ_DIR = objs
 OBJ = $(SRC:.cpp=.o)

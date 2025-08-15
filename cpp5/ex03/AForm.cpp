@@ -98,7 +98,7 @@ const char* AForm::AlreadySignedException::what() const throw()
 
 const char* AForm::NotSignedBeforeExecException::what() const throw()
 {
-	return "The form needs to be signed to be able to execute it.";
+	return "the form needs to be signed to be able to execute it.";
 }
 
 std::ostream & operator<<(std::ostream & out, AForm const & Aform)

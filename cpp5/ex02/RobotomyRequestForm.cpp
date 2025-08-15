@@ -37,6 +37,6 @@ void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << "\n";
+		throw;
 	}
 }
