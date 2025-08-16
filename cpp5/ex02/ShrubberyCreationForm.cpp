@@ -1,12 +1,12 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Shrubbery Creation", false, 145, 137), _target("Someone")
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Shrubbery Creation", 145, 137), _target("Someone")
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubbery Creation", false, 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubbery Creation", 145, 137), _target(target)
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & copy) : AForm("Shrubbery Creation", false, 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & copy) : AForm("Shrubbery Creation", 145, 137)
 {
 	*this = copy;
 }
@@ -47,7 +47,6 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 
 		std::string name = this->_target + "_shrubbery";
 		std::ofstream file(name.c_str());
-
 		printAsciiTreeInFile(file);
 		file.close();
 	}

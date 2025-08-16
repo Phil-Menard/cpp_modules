@@ -1,14 +1,14 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm("presidential pardon", false, 25, 5), _target("Someone")
+PresidentialPardonForm::PresidentialPardonForm() : AForm("presidential pardon", 25, 5), _target("Someone")
 {}
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target) :
-	AForm("presidential pardon", false, 25, 5), _target(target)
+	AForm("presidential pardon", 25, 5), _target(target)
 {}
 
 PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const & copy) :
-	AForm("Presidential Pardon", false, 25, 5)
+	AForm("Presidential Pardon", 25, 5)
 {
 	*this = copy;
 }

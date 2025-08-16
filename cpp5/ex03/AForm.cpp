@@ -3,8 +3,8 @@
 AForm::AForm() : _name("default") ,_isSigned(false), _gradeToSign(100), _gradeToExec(100)
 {}
 
-AForm::AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExec) :
-_name(name), _isSigned(isSigned), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec)
+AForm::AForm(std::string name, int gradeToSign, int gradeToExec) :
+_name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec)
 {
 	if (this->getGradeToSign() <= 0)
 		throw AForm::GradeToSignTooHighException();

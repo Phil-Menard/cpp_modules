@@ -18,6 +18,12 @@ class Intern
 		AForm* President(const std::string target);
 		AForm* Robotomy(const std::string target);
 		AForm* Shrubbery(const std::string target);
+
+		struct forms
+		{
+			std::string formName;
+			AForm* (Intern::*func)(const std::string);
+		};
 };
 
 #endif

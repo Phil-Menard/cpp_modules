@@ -9,7 +9,7 @@ class AForm
 {
 	public:
 		AForm();
-		AForm(std::string name, bool isSigned, int gradeToSign, int gradeToExec);
+		AForm(std::string name, int gradeToSign, int gradeToExec);
 		AForm(AForm const & copy);
 		AForm & operator=(AForm const & other);
 		virtual ~AForm();

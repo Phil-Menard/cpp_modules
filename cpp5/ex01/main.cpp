@@ -7,7 +7,7 @@ int main()
 	try
 	{
 		Bureaucrat guy("Guy", 50);
-		Form form("24E", false, 60, 50);
+		Form form("24E", 60, 50);
 		std::cout << form << std::endl;
 		std::cout << guy << std::endl;
 		guy.signForm(form);
@@ -24,7 +24,7 @@ int main()
 	try
 	{
 		Bureaucrat guy("Guy", 50);
-		Form form("42C", false, 20, 50);
+		Form form("42C", 20, 50);
 		std::cout << form << std::endl;
 		std::cout << guy << std::endl;
 		guy.signForm(form);
@@ -41,7 +41,7 @@ int main()
 	try
 	{
 		Bureaucrat guy("Guy", 22);
-		Form form("42C", false, 20, 50);
+		Form form("42C", 20, 50);
 		std::cout << form << std::endl;
 		std::cout << guy << std::endl;
 		guy.incrementGrade();
@@ -61,7 +61,7 @@ int main()
 	try
 	{
 		Bureaucrat guy("Guy", 50);
-		Form form("42C", false, 0, 50);
+		Form form("42C", 0, 50);
 		std::cout << form << std::endl;
 		std::cout << guy << std::endl;
 		guy.signForm(form);
@@ -78,24 +78,7 @@ int main()
 	try
 	{
 		Bureaucrat guy("Guy", 50);
-		Form form("42C", false, 160, 50);
-		std::cout << form << std::endl;
-		std::cout << guy << std::endl;
-		guy.signForm(form);
-		std::cout << form << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-
-	std::cout << "--------------" << std::endl;
-
-	//FORM ALREADY SIGNED
-	try
-	{
-		Bureaucrat guy("Guy", 50);
-		Form form("64A", true, 80, 50);
+		Form form("42C", 160, 50);
 		std::cout << form << std::endl;
 		std::cout << guy << std::endl;
 		guy.signForm(form);

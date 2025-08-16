@@ -1,12 +1,12 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy Request", false, 72, 45), _target("Someone")
+RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy Request", 72, 45), _target("Someone")
 {}
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy Request", false, 72, 45), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy Request", 72, 45), _target(target)
 {}
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & copy) : AForm("Robotomy Request", false, 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & copy) : AForm("Robotomy Request", 72, 45)
 {
 	*this = copy;
 }

@@ -1,12 +1,12 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("shrubbery creation", false, 145, 137), _target("Someone")
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("shrubbery creation", 145, 137), _target("Someone")
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("shrubbery creation", false, 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("shrubbery creation", 145, 137), _target(target)
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & copy) : AForm("shrubbery creation", false, 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & copy) : AForm("shrubbery creation", 145, 137)
 {
 	*this = copy;
 }

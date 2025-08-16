@@ -37,17 +37,20 @@ AForm* Intern::makeForm(std::string name, std::string target)
 	for(size_t i = 0; i < name.size(); i++)
 	name[i] = std::tolower(name[i]);
 
-	std::string	formName[3] = {"robotomy request", "presidential pardon", "shrubbery creation"};
-	AForm* (Intern::*form[3])(const std::string) = {&Intern::Robotomy, &Intern::President, &Intern::Shrubbery};
+	forms forms[3] = {
+		{"robotomy request", &Intern::Robotomy},
+		{"presidential pardon", &Intern::President},
+		{"shrubbery creation", &Intern::Shrubbery}
+	};
 
 	for (size_t i = 0; i < 3; i++)
 	{
-		if (name == formName[i])
+		if (name == forms[i].formName)
 		{
-			std::cout << "Intern creates form." << std::endl;
-			return (this->*form[i])(target);
+			std::cout << "Intern creates form \"" << name << "\"." << std::endl;
+			return (this->*forms[i].func)(target);
 		}
 	}
-	std::cout << "There is no form known under this name" << std::endl;
+	std::cout << "There is no form known under \"" << name << "\"." << std::endl;
 	return 0;
 }
