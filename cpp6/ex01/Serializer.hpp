@@ -6,15 +6,15 @@
 
 class Serializer
 {
-    public:
-        static uintptr_t serialize(Data* ptr);
-        static Data* deserialize(uintptr_t raw);
+	public:
+		static uintptr_t serialize(Data* ptr);
+		static Data* deserialize(uintptr_t raw);
 
-    private:
-        Serializer();
-        Serializer(Serializer const & copy);
-        Serializer & operator=(Serializer const & other);
-        ~Serializer();
+	private:
+		Serializer();
+		Serializer(Serializer const & copy);
+		Serializer & operator=(Serializer const & other);
+		~Serializer();
 };
 
 #endif

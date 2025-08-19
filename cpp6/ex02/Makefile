@@ -2,9 +2,9 @@ CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 DEBUG_FLAGS = -g
 
-NAME = serialization
+NAME = identify
 SRC = main.cpp \
-	Serializer.cpp
+	Base.cpp 
 
 OBJ_DIR = objs
 OBJ = $(SRC:.cpp=.o)

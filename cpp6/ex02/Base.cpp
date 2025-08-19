@@ -1,19 +1,7 @@
 #include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
 Base::~Base()
 {}
-
-Base * Base::generate()
-{
-
-}
-
-void Base::identify(Base* p)
-{
-
-}
-
-void Base::identify(Base& p)
-{
-
-}

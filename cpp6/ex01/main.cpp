@@ -4,13 +4,13 @@
 
 int main()
 {
-    Data d;
-    d.val = 42;
+	Data d;
+	d.val = 42;
+	
+	uintptr_t a = Serializer::serialize(&d);
+	std::cout << a << std::endl;
+	Data* b = Serializer::deserialize(a);
+	std::cout << b->val << std::endl;
 
-    uintptr_t a = Serializer::serialize(&d);
-    std::cout << a << std::endl;
-    Data* b = Serializer::deserialize(a);
-    std::cout << b->val << std::endl;
-
-    return 0;
+	return 0;
 }

@@ -5,13 +5,13 @@ Serializer::Serializer()
 
 Serializer::Serializer(Serializer const & copy)
 {
-    *this = copy;
+	*this = copy;
 }
 
 Serializer & Serializer::operator=(Serializer const & other)
 {
-    (void) other;
-    return *this;
+	(void) other;
+	return *this;
 }
 
 Serializer::~Serializer()
@@ -19,10 +19,10 @@ Serializer::~Serializer()
 
 uintptr_t Serializer::serialize(Data* ptr)
 {
-    return reinterpret_cast<uintptr_t>(ptr);
+	return reinterpret_cast<uintptr_t>(ptr);
 }
 
 Data* Serializer::deserialize(uintptr_t raw)
 {
-    return reinterpret_cast<Data*>(raw);
+	return reinterpret_cast<Data*>(raw);
 }
