@@ -3,13 +3,30 @@
 
 #include <iostream>
 
+
+template<typename T>
 class Array
 {
-	Array();
-	Array(unsigned int n);
-	Array(Array const & copy);
-	Array & operator=(Array const & other);
-	~Array();
+	public:
+		Array();
+		Array(unsigned int n);
+		Array(Array const & copy);
+		Array & operator=(Array const & other);
+		~Array();
+
+		T & operator[](unsigned int n);
+		size_t size() const;
+
+		class OutOfBoundsException : public std::exception
+		{
+			virtual const char* what() const throw();
+		};
+
+	private:
+		T* _arr;
+		size_t _size;
 };
+
+#include "Array.tpp"
 
 #endif
