@@ -15,6 +15,7 @@ class Array
 		~Array();
 
 		T & operator[](unsigned int n);
+		T const & operator[](unsigned int n) const;
 		size_t size() const;
 
 		class OutOfBoundsException : public std::exception
