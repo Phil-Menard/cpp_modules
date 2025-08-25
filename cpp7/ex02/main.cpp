@@ -1,7 +1,7 @@
 #include "Array.hpp"
 #include <math.h>
 
-/* #define MAX_VAL 750
+#define MAX_VAL 750
 int main(int, char**)
 {
 	Array<int> numbers(MAX_VAL);
@@ -50,9 +50,9 @@ int main(int, char**)
 	}
 	delete [] mirror;//
 	return 0;
-} */
+}
 
-int main()
+/* int main()
 {
 	{
 		Array<int> a;
@@ -104,9 +104,12 @@ int main()
 			std::cout << a[i] << std::endl;
 		}
 		const Array<char> b(a);
-		for (size_t i = 0; i < a.size(); i++)
+		for (size_t i = 0; i < b.size(); i++)
 			std::cout << b[i] << std::endl;
+		const Array<char> c(b);
+		for (size_t i = 0; i < c.size(); i++)
+			std::cout << c[i] << std::endl;
 	}
 
 	return 0;
-}
+} */
