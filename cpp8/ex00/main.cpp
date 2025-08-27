@@ -6,12 +6,12 @@ int main()
 	try
 	{
 		std::vector<int>a;
-		a.push_back(1);
-		a.push_back(2);
-		a.push_back(3);
-		a.push_back(4);
-		a.push_back(5);
-		std::vector<int>::iterator it = easyfind(a, 5);
+		a.push_back(10);
+		a.push_back(20);
+		a.push_back(30);
+		a.push_back(40);
+		a.push_back(50);
+		std::vector<int>::iterator it = easyfind(a, 50);
 		std::cout << *it << std::endl;
 	}
 	catch(const std::exception& e)

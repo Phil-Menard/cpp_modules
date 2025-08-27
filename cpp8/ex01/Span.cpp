@@ -17,6 +17,7 @@ Span & Span::operator=(Span const & other)
 	{
 		this->_size = other._size;
 		this->_v = other._v;
+		this->_index = other._index;
 	}
 	return *this;
 }
@@ -75,8 +76,8 @@ int Span::shortestSpan()
 	else
 	{
 		sort(this->_v.begin(), this->_v.end());
-		int a = this->_v[this->_index - 1];
-		for (int i = this->_index - 1; i > 0; i--)
+		int a = this->_v[this->_size - 1];
+		for (int i = this->_size - 1; i > 0; i--)
 		{
 			if (this->_v[i] - this->_v[i - 1] < a)
 				a = this->_v[i] - this->_v[i - 1];
@@ -91,8 +92,9 @@ int Span::longestSpan()
 		throw NoSpanPossibleException();
 	else
 	{
-		sort(this->_v.begin(), this->_v.end());
-		return this->_v[this->_index - 1] - this->_v[0];
+		int min = *std::min_element(this->_v.begin(), this->_v.end());
+		int max = *std::max_element(this->_v.begin(), this->_v.end());
+		return max - min;
 	}
 }
 

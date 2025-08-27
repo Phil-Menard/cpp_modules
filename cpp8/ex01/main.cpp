@@ -18,8 +18,8 @@ int main()
 	//SPAN FROM SUBJECT
 	try
 	{
-		Span a(5);
-		a.addNumber(6);
+		Span a(6);
+		a.addNumber(0);
 		a.addNumber(3);
 		a.addNumber(17);
 		a.addNumber(9);
@@ -43,7 +43,9 @@ int main()
 		v.push_back(17);
 		v.push_back(9);
 		v.push_back(11);
-		Span a(5);
+		Span b(5);
+		Span c(b);
+		Span a = c;
 		a.addNumberRange(v.begin(), v.end());
 		std::cout << a.shortestSpan() << std::endl;
 		std::cout << a.longestSpan() << std::endl;
@@ -62,6 +64,9 @@ int main()
 		a.addRandomNumberRange(a.getBeginIterator(), a.getEndIterator());
 		std::cout << a.shortestSpan() << std::endl;
 		std::cout << a.longestSpan() << std::endl;
+		Span b(a);
+		std::cout << b.shortestSpan() << std::endl;
+		std::cout << b.longestSpan() << std::endl;
 	}
 	catch(const std::exception& e)
 	{
