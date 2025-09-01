@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	{
 		BitcoinExchange btc;
 		btc.retrieveDataFile();
-		btc.displayBtc(argv[1]);
+		btc.readInputFile(argv[1]);
 	}
 	catch(const std::exception& e)
 	{

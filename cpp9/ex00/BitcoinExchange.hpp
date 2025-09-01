@@ -17,7 +17,8 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		void retrieveDataFile();
-		void displayBtc(char* & file);
+		void readInputFile(char* & file);
+		void getMapValue(std::string date, std::string value);
 		void printDataMap();
 
 		class FileNotOpenException : public std::exception
