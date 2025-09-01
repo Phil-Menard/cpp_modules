@@ -65,9 +65,20 @@ void getDate(std::string date, int & year, int & month, int & day)
 	day = atoi(date2.substr(found + 1, date2.size()).c_str());
 }
 
-int checkDay(int year, int month, int day)
+int checkDate(int year, int month, int day)
 {
 	int daysPerMonths[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+	if (year < 2009)
+	{
+		std::cout << "Error: The year should at least start from 2009." << std::endl;
+		return 1;
+	}
+	if ((month < 1 || month > 12))
+	{
+		std::cout << "This month does not exist" << std::endl;
+		return 1;
+	}
 
 	//check leap years
 	if (year % 4 == 0)
@@ -88,33 +99,58 @@ int checkDay(int year, int month, int day)
 	return 0;
 }
 
+int checkValue(std::string value)
+{
+	float a = strtof(value.c_str(), NULL);
+	if (a < 0)
+	{
+		std::cout << "Error: not a positive number." << std::endl;
+		return 1;
+	}
+	if (a > 1000)
+	{
+		std::cout << "Error: too large a number." << std::endl;
+		return 1;
+	}
+	return 0;
+}
+
 void checkLine(std::string line)
 {
 	int i = 0;
 	int year,month,day;
 	for (;line[i] && line[i] != '|' ; i++);
-
-	
-	//CHECK DATE
+	if (i >= static_cast<int>(line.size()))
+	{
+		std::cout << "Error: bad input => " << line << std::endl;
+		return;
+	}
 	std::string date = line.substr(0, i);
-	getDate(date, year, month, day);
-	std::cout << "year : " << year << " | month : " << month << " | day : " << day << std::endl;
-	if (year < 2009)
-	{
-		std::cout << "Error: The year should at least start from 2009." << std::endl;
-		return;
-	}
-	if ((month < 1 || month > 12))
-	{
-		std::cout << "This month does not exist" << std::endl;
-		return;
-	}
-	if (checkDay(year, month, day) == 1)
-		return;
-	
-	//CHECK VALUE
 
-	getValue();
+	while(line[i] && !isdigit(line[i]))
+		i++;
+	int j = i;
+	if (line[i - 1] == '-')
+		i--;
+	while(line[j] && (isdigit(line[i]) || line[i] == '.'))
+		j++;
+	if (j < static_cast<int>(line.size()-1))
+	{
+		std::cout << "Error: bad input => " << line << std::endl;
+		return;
+	}
+
+	//CHECK DATE
+	getDate(date, year, month, day);
+	// std::cout << "year : " << year << " | month : " << month << " | day : " << day << std::endl;
+	if (checkDate(year, month, day) == 1)
+		return;
+
+	//CHECK VALUE
+	std::string value = line.substr(i, j);
+	std::cout << "value : " << value << std::endl;
+	if(checkValue(value) == 1)
+		return;
 }
 
 void BitcoinExchange::displayBtc(char* & file)
