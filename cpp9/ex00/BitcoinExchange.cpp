@@ -49,20 +49,27 @@ void BitcoinExchange::retrieveDataFile()
 	}
 }
 
-void getDate(std::string date, int & year, int & month, int & day)
+int getDate(std::string date, int & year, int & month, int & day)
 {
 	size_t found = date.find("-");
 	if (found == std::string::npos)
+	{
 		std::cout << "Invalid format." << std::endl;
+		return 1;
+	}
 	year = atoi(date.substr(0, found).c_str());
 
 	std::string date2 = date.substr(found + 1, date.size());
 	found = date2.find("-");
 	if (found == std::string::npos)
+	{
 		std::cout << "Invalid format." << std::endl;
+		return 1;
+	}
 
 	month = atoi(date2.substr(0, found).c_str());
 	day = atoi(date2.substr(found + 1, date2.size()).c_str());
+	return 0;
 }
 
 int checkDate(int year, int month, int day)
@@ -136,7 +143,8 @@ int checkLine(std::string line, std::string & date, std::string & value)
 	date = line.substr(0, i);
 
 	//CHECK DATE
-	getDate(date, year, month, day);
+	if (getDate(date, year, month, day) == 1)
+		return 1;
 	if (checkDate(year, month, day) == 1)
 		return 1;
 
