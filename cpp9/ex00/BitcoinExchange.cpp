@@ -79,6 +79,11 @@ int checkDate(int year, int month, int day)
 		std::cout << "Error: the year should at least start from 2009." << std::endl;
 		return 1;
 	}
+	if (year == 2009 && month == 1 && day == 1)
+	{
+		std::cout << "Error: the date should at least start from 2009-01-02." << std::endl;
+		return 1;
+	}
 	if ((month < 1 || month > 12))
 	{
 		std::cout << "Error: this month does not exist." << std::endl;
