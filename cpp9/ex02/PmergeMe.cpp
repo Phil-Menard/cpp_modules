@@ -84,18 +84,11 @@ void PmergeMe::sortBig()
 		sortBig();
 }
 
-int binarySearch(int a, std::vector<int> & v)
+int binarySearch(int a, std::vector<int> v)
 {
-	if (v.size() == 1)
-	{
-		if (v[0] > a)
-			return 0;
-		else
-			return 1;
-	}
 	int begin = 0;
 	int end = v.size() - 1;
-	while (begin != end)
+	while (begin <= end)
 	{
 		int middle = (begin + end) / 2;
 		if (a > v[middle])
@@ -110,35 +103,75 @@ int binarySearch(int a, std::vector<int> & v)
 
 void PmergeMe::insertSmalls()
 {
-	// 0, 1, 1, 3, 5, 11, 21
 	std::vector<int> jacobsthal;
 	jacobsthal.push_back(1);
-	jacobsthal.push_back(3);
-	while (1)
+	if (this->sequence.size() > 3)
 	{
-		int a = jacobsthal[jacobsthal.size()-1] + (jacobsthal[jacobsthal.size()-2] * 2);
-		if (a < static_cast<int>(this->small.size()))
+		jacobsthal.push_back(3);
+		//fill jacobsthal sequence
+		while (1)
+		{
+			int a = jacobsthal[jacobsthal.size()-1] + (jacobsthal[jacobsthal.size()-2] * 2);
+			if (a < static_cast<int>(this->small.size()))
 			jacobsthal.push_back(a);
-		else
+			else
 			break;
+		}
 	}
-	std::cout << "jacobsthal size : " << jacobsthal.size() << std::endl;
-	int i = 0;
-	std::cout << "insertion index : " << binarySearch(this->small[jacobsthal[i]], this->sequence) << std::endl;
+	//insert smalls based on jacobsthal sequence into sequence vector
+	for (size_t i = 0; i < jacobsthal.size(); i++)
+	{
+		int index = binarySearch(this->small[jacobsthal[i]], this->sequence);
+		std::vector<int>::iterator it = this->sequence.begin();
+		this->sequence.insert(it + index, this->small[jacobsthal[i]]);
+		displayVectors();
+		std::cout << std::endl;
+	}
+	//remove smalls based on jacobsthal sequence vector
+	for (int i = jacobsthal.size() - 1; i >= 0 ; i--)
+	{
+		std::vector<int>::iterator its = this->small.begin();
+		this->small.erase(its + jacobsthal[i]);
+	}
+	displayVectors();
+	//insert rest of smalls
+	for (size_t i = 0; i < this->small.size(); i++)
+	{
+		int index = binarySearch(this->small[i], this->sequence);
+		std::vector<int>::iterator it = this->sequence.begin();
+		this->sequence.insert(it + index, this->small[i]);
+		displayVectors();
+		std::cout << std::endl;
+	}
+	this->small.clear();
 	displayVectors();
 }
 
 void PmergeMe::algo()
 {
+	if (this->sequence.size() == 0)
+	{
+		std::cerr << "No numbers detected." << std::endl;
+		return;	
+	}
+	if (this->sequence.size() == 1)
+	{
+		displayVectors();
+		return;	
+	}
 	//create pairs and put lowers and biggests numbers in their vectors
 	displayVectors();
+
 	std::cout << std::endl;
+	
 	createPairs(this->sequence);
 	comparePairs();
 	displayVectors();
 
 	//sort sequence recursively until there is only the biggest number in it
 	sortBig();
+
+	std::cout << std::endl;
 
 	//insert numbers from small into sequence recursively
 	insertSmalls();
