@@ -2,9 +2,9 @@ CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 DEBUG_FLAGS = -g
 
-NAME = RPN
+NAME = PmergeMe
 SRC = main.cpp \
-	RPN.cpp
+	PmergeMe.cpp
 
 OBJ_DIR = objs
 OBJ = $(SRC:.cpp=.o)
