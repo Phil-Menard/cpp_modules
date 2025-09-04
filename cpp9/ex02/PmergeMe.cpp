@@ -3,11 +3,6 @@
 PmergeMe::PmergeMe()
 {}
 
-PmergeMe::PmergeMe(std::string str)
-{
-	fillSequence(str);
-}
-
 PmergeMe::PmergeMe(PmergeMe const & copy)
 {
 	*this = copy;
@@ -17,16 +12,50 @@ PmergeMe & PmergeMe::operator=(PmergeMe const & other)
 {
 	if (this != &other)
 	{
-		this->sequence = other.sequence;
-		this->sequence = other.sequence;
-		this->small = other.small;
-		this->pairs = other.pairs;
+		this->sequenceV = other.sequenceV;
+		this->sequenceV = other.sequenceV;
+		this->smallV = other.smallV;
+		this->pairsV = other.pairsV;
 	}
 	return *this;
 }
 
 PmergeMe::~PmergeMe()
 {}
+
+template<typename T>
+void displaySequence(T sequence)
+{
+	std::cout << "Sequence : ";
+	for (size_t i = 0; i < sequence.size(); i++)
+		std::cout << sequence[i] << " ";
+	std::cout << std::endl;
+}
+
+template<typename T>
+void displayPairs(T pairs)
+{
+	std::cout << "Pairs : ";
+	for (size_t i = 0; i < pairs.size(); i++)
+		std::cout << "[" << pairs[i].first << "," << pairs[i].second << "] ";
+	std::cout << std::endl;
+}
+
+template<typename T>
+void displaySmall(T small)
+{
+	std::cout << "Smalls : ";
+	for (size_t i = 0; i < small.size(); i++)
+		std::cout << small[i] << " ";
+	std::cout << std::endl;
+}
+
+template<typename T>
+void displayVectors(T sequence, T small)
+{
+	displaySequence(sequence);
+	displaySmall(small);
+}
 
 void PmergeMe::fillSequence(std::string str)
 {
@@ -38,53 +67,65 @@ void PmergeMe::fillSequence(std::string str)
 		size_t j = i;
 		for (; j < str.size() && str[j] != ' '; j++);
 		std::string number = str.substr(i, j);
-		this->sequence.push_back(std::atoi(number.c_str()));
+		int a = std::atoi(number.c_str());
+		if (a < 0)
+		{
+			this->sequenceD.clear();
+			this->sequenceV.clear();
+			return;
+		}
+		this->sequenceV.push_back(a);
+		this->sequenceD.push_back(a);
 		i = j;
 	}
 }
 
-void PmergeMe::comparePairs()
+template<typename T, typename P>
+void comparePairs(T & sequence, P & pairs, T & small)
 {
-	while(!this->pairs.empty())
+	while(!pairs.empty())
 	{
-		if (this->pairs[0].first > this->pairs[0].second)
+		if (pairs[0].first > pairs[0].second)
 		{
-			this->sequence.push_back(this->pairs[0].first);
-			this->small.push_back(this->pairs[0].second);
+			sequence.push_back(pairs[0].first);
+			small.push_back(pairs[0].second);
 		}
 		else
 		{
-			this->sequence.push_back(this->pairs[0].second);
-			this->small.push_back(this->pairs[0].first);
+			sequence.push_back(pairs[0].second);
+			small.push_back(pairs[0].first);
 		}
-		this->pairs.erase(this->pairs.begin(), this->pairs.begin()+1);
+		pairs.erase(pairs.begin(), pairs.begin()+1);
 	}
 }
 
-void PmergeMe::createPairs(std::vector<int> & v)
+template<typename T, typename P>
+void createPairs(T & v, P & pairs, T & small)
 {
 	for(size_t i = 0; i < v.size(); i+=2)
 	{
 		if (i+1 < v.size())
-			this->pairs.push_back(std::pair<int, int>(v[i], v[i+1]));
+			pairs.push_back(std::pair<int, int>(v[i], v[i+1]));
 		else
-			this->small.push_back(v[i]);
+			small.push_back(v[i]);
 	}
 	v.clear();
-	displayPairs();
+	displayPairs(pairs);
 }
 
-void PmergeMe::sortBig()
+template<typename T, typename P>
+void sortSequence(T & sequence, P & pairs, T & small)
 {
-	std::cout << "---------SORT BIG----------" << std::endl;
-	createPairs(this->sequence);
-	comparePairs();
-	displayVectors();
-	if (this->sequence.size() > 1)
-		sortBig();
+	std::cout << "---------SORT SEQUENCE----------" << std::endl;
+	createPairs(sequence, pairs, small);
+	comparePairs(sequence, pairs, small);
+	displayVectors(sequence, small);
+	if (sequence.size() > 1)
+		sortSequence(sequence, pairs, small);
 }
 
-int binarySearch(int a, std::vector<int> v)
+template<typename T>
+int binarySearch(int a, T v)
 {
 	int begin = 0;
 	int end = v.size() - 1;
@@ -101,108 +142,102 @@ int binarySearch(int a, std::vector<int> v)
 	return begin;
 }
 
-void PmergeMe::insertSmalls()
+template<typename T>
+void insertSmalls(T & sequence, T & small)
 {
-	std::vector<int> jacobsthal;
+	T jacobsthal;
 	jacobsthal.push_back(1);
-	if (this->sequence.size() > 3)
+	if (small.size() > 3)
 	{
 		jacobsthal.push_back(3);
 		//fill jacobsthal sequence
 		while (1)
 		{
 			int a = jacobsthal[jacobsthal.size()-1] + (jacobsthal[jacobsthal.size()-2] * 2);
-			if (a < static_cast<int>(this->small.size()))
-			jacobsthal.push_back(a);
+			if (a < static_cast<int>(small.size()))
+				jacobsthal.push_back(a);
 			else
-			break;
+				break;
 		}
 	}
 	//insert smalls based on jacobsthal sequence into sequence vector
 	for (size_t i = 0; i < jacobsthal.size(); i++)
 	{
-		int index = binarySearch(this->small[jacobsthal[i]], this->sequence);
-		std::vector<int>::iterator it = this->sequence.begin();
-		this->sequence.insert(it + index, this->small[jacobsthal[i]]);
-		displayVectors();
+		int index = binarySearch(small[jacobsthal[i]], sequence);
+		typename T::iterator it = sequence.begin();
+		sequence.insert(it + index, small[jacobsthal[i]]);
+		displayVectors(sequence, small);
 		std::cout << std::endl;
 	}
 	//remove smalls based on jacobsthal sequence vector
 	for (int i = jacobsthal.size() - 1; i >= 0 ; i--)
 	{
-		std::vector<int>::iterator its = this->small.begin();
-		this->small.erase(its + jacobsthal[i]);
+		typename T::iterator its = small.begin();
+		small.erase(its + jacobsthal[i]);
 	}
-	displayVectors();
-	//insert rest of smalls
-	for (size_t i = 0; i < this->small.size(); i++)
+	displayVectors(sequence, small);
+	std::cout << std::endl;
+
+	//insert rest of smalls in reverse order
+	for (int i = small.size() - 1; i >= 0; i--)
 	{
-		int index = binarySearch(this->small[i], this->sequence);
-		std::vector<int>::iterator it = this->sequence.begin();
-		this->sequence.insert(it + index, this->small[i]);
-		displayVectors();
+		int index = binarySearch(small[i], sequence);
+		typename T::iterator it = sequence.begin();
+		sequence.insert(it + index, small[i]);
+		displayVectors(sequence, small);
 		std::cout << std::endl;
 	}
-	this->small.clear();
-	displayVectors();
+	small.clear();
+	displayVectors(sequence, small);
 }
 
-void PmergeMe::algo()
+void PmergeMe::algo(std::string str)
 {
-	if (this->sequence.size() == 0)
+	this->fillSequence(str);
+	if (this->sequenceV.size() == 0)
 	{
-		std::cerr << "No numbers detected." << std::endl;
-		return;	
+		std::cerr << "Error" << std::endl;
+		return;
 	}
-	if (this->sequence.size() == 1)
+	if (this->sequenceV.size() == 1)
 	{
-		displayVectors();
-		return;	
+		displayVectors(this->sequenceV, this->smallV);
+		displayVectors(this->sequenceD, this->smallD);
+		return;
 	}
-	//create pairs and put lowers and biggests numbers in their vectors
-	displayVectors();
-
+	//--------------VECTORS--------------
+	displayVectors(this->sequenceV, this->smallV);
 	std::cout << std::endl;
 	
-	createPairs(this->sequence);
-	comparePairs();
-	displayVectors();
+	//create pairs and put lowers and biggests numbers in their vectors
+	createPairs(this->sequenceV, this->pairsV, this->smallV);
+	comparePairs(this->sequenceV, this->pairsV, this->smallV);
+	displayVectors(this->sequenceV, this->smallV);
 
 	//sort sequence recursively until there is only the biggest number in it
-	sortBig();
+	sortSequence(this->sequenceV, this->pairsV, this->smallV);
 
 	std::cout << std::endl;
 
-	//insert numbers from small into sequence recursively
-	insertSmalls();
-}
+	//insert numbers from small into sequence
+	insertSmalls(this->sequenceV, this->smallV);
 
-void PmergeMe::displayVectors()
-{
-	displaySequence();
-	displaySmall();
-}
 
-void PmergeMe::displaySequence()
-{
-	std::cout << "Sequence : ";
-	for (size_t i = 0; i < this->sequence.size(); i++)
-		std::cout << this->sequence[i] << " ";
+	//-------------DEQUE--------------
+	displayVectors(this->sequenceV, this->smallV);
 	std::cout << std::endl;
-}
+	
+	//create pairs and put lowers and biggests numbers in their vectors
+	createPairs(this->sequenceD, this->pairsD, this->smallD);
+	comparePairs(this->sequenceD, this->pairsD, this->smallD);
+	displayVectors(this->sequenceD, this->smallD);
 
-void PmergeMe::displayPairs()
-{
-	std::cout << "Pairs : ";
-	for (size_t i = 0; i < this->pairs.size(); i++)
-		std::cout << "[" << this->pairs[i].first << "," << this->pairs[i].second << "] ";
-	std::cout << std::endl;
-}
+	//sort sequence recursively until there is only the biggest number in it
+	sortSequence(this->sequenceD, this->pairsD, this->smallD);
 
-void PmergeMe::displaySmall()
-{
-	std::cout << "Smalls : ";
-	for (size_t i = 0; i < this->small.size(); i++)
-		std::cout << this->small[i] << " ";
 	std::cout << std::endl;
+
+	//insert numbers from small into sequence
+	insertSmalls(this->sequenceD, this->smallD);
+
 }

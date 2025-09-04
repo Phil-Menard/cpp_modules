@@ -4,34 +4,29 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <deque>
 #include <cstdlib>
 
 class PmergeMe
 {
 	public:
 		PmergeMe();
-		PmergeMe(std::string str);
 		PmergeMe(PmergeMe const & copy);
 		PmergeMe & operator=(PmergeMe const & other);
 		~PmergeMe();
 
-		void algo();
+		void algo(std::string str);
 
 	private:
-		std::vector<int> sequence;
-		std::vector<int> big;
-		std::vector<int> small;
-		std::vector<std::pair<int, int> > pairs;
+		std::vector<int> sequenceV;
+		std::vector<int> smallV;
+		std::vector<std::pair<int, int> > pairsV;
+
+		std::deque<int> sequenceD;
+		std::deque<int> smallD;
+		std::deque<std::pair<int, int> > pairsD;
 
 		void fillSequence(std::string str);
-		void displaySequence();
-		void displayPairs();
-		void displaySmall();
-		void displayVectors();
-		void createPairs(std::vector<int> & v);
-		void comparePairs();
-		void sortBig();
-		void insertSmalls();
 };
 
 #endif

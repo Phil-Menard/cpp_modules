@@ -9,8 +9,9 @@ int main(int argc, char **argv)
 	}
 
 	std::string arg = argv[1];
-	PmergeMe merge(arg);
-	merge.algo();
-
+	PmergeMe merge;
+	merge.algo(arg);
 	return 0;
 }
+
+//`shuf -i 1-1000 -n 3000 | tr "\n" " " `
