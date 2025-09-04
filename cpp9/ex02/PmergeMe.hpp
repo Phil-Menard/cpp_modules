@@ -6,6 +6,8 @@
 #include <vector>
 #include <deque>
 #include <cstdlib>
+#include <ctime>
+#include <iomanip>
 
 class PmergeMe
 {
@@ -15,7 +17,7 @@ class PmergeMe
 		PmergeMe & operator=(PmergeMe const & other);
 		~PmergeMe();
 
-		void algo(std::string str);
+		void algo(char **argv);
 
 	private:
 		std::vector<int> sequenceV;
@@ -26,7 +28,7 @@ class PmergeMe
 		std::deque<int> smallD;
 		std::deque<std::pair<int, int> > pairsD;
 
-		void fillSequence(std::string str);
+		void fillSequence(char **argv);
 };
 
 #endif

@@ -17,7 +17,7 @@ class RPN
 		void add();
 		void substract();
 		void multiply();
-		void divide();
+		int divide();
 
 	private:
 		std::stack<int> rpnstack;

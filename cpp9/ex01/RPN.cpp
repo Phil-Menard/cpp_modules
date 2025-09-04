@@ -75,7 +75,10 @@ void RPN::calculExpression(std::string str)
 			else if (str[i] == '*')
 				multiply();
 			else
-				divide();
+			{
+				if (divide() == 1)
+					return;
+			}
 		}
 	}
 	if (this->rpnstack.size() != 1)
@@ -113,11 +116,17 @@ void RPN::multiply()
 	this->rpnstack.push(x * y);
 }
 
-void RPN::divide()
+int RPN::divide()
 {
 	int x = this->rpnstack.top();
+	if (x == 0)
+	{
+		std::cerr << "Error : impossible to divide per 0" << std::endl;
+		return 1;
+	}
 	this->rpnstack.pop();
 	int y = this->rpnstack.top();
 	this->rpnstack.pop();
 	this->rpnstack.push(y / x);
+	return 0;
 }

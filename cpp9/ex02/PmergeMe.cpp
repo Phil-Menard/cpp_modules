@@ -26,49 +26,27 @@ PmergeMe::~PmergeMe()
 template<typename T>
 void displaySequence(T sequence)
 {
-	std::cout << "Sequence : ";
 	for (size_t i = 0; i < sequence.size(); i++)
 		std::cout << sequence[i] << " ";
 	std::cout << std::endl;
 }
 
-template<typename T>
-void displayPairs(T pairs)
+void PmergeMe::fillSequence(char **argv)
 {
-	std::cout << "Pairs : ";
-	for (size_t i = 0; i < pairs.size(); i++)
-		std::cout << "[" << pairs[i].first << "," << pairs[i].second << "] ";
-	std::cout << std::endl;
-}
-
-template<typename T>
-void displaySmall(T small)
-{
-	std::cout << "Smalls : ";
-	for (size_t i = 0; i < small.size(); i++)
-		std::cout << small[i] << " ";
-	std::cout << std::endl;
-}
-
-template<typename T>
-void displayVectors(T sequence, T small)
-{
-	displaySequence(sequence);
-	displaySmall(small);
-}
-
-void PmergeMe::fillSequence(std::string str)
-{
-	size_t i = 0;
-	while ((str[i] <= 9 && str[i] >= 13) || str[i] == ' ')
-		i++;
-	for (; i < str.size(); i++)
+	for (int i = 1; argv[i]; i++)
 	{
-		size_t j = i;
-		for (; j < str.size() && str[j] != ' '; j++);
-		std::string number = str.substr(i, j);
-		int a = std::atoi(number.c_str());
-		if (a < 0)
+		int a = std::atoi(argv[i]);
+		int b = a;
+		std::string comp;
+		if (a == 0)
+			comp = "0";
+		while (b > 0)
+		{
+			comp += (b % 10) + '0';
+			b /= 10;
+		}
+		std::reverse(comp.begin(), comp.end());
+		if (a < 0 || comp != argv[i])
 		{
 			this->sequenceD.clear();
 			this->sequenceV.clear();
@@ -76,7 +54,6 @@ void PmergeMe::fillSequence(std::string str)
 		}
 		this->sequenceV.push_back(a);
 		this->sequenceD.push_back(a);
-		i = j;
 	}
 }
 
@@ -110,16 +87,13 @@ void createPairs(T & v, P & pairs, T & small)
 			small.push_back(v[i]);
 	}
 	v.clear();
-	displayPairs(pairs);
 }
 
 template<typename T, typename P>
 void sortSequence(T & sequence, P & pairs, T & small)
 {
-	std::cout << "---------SORT SEQUENCE----------" << std::endl;
 	createPairs(sequence, pairs, small);
 	comparePairs(sequence, pairs, small);
-	displayVectors(sequence, small);
 	if (sequence.size() > 1)
 		sortSequence(sequence, pairs, small);
 }
@@ -166,8 +140,6 @@ void insertSmalls(T & sequence, T & small)
 		int index = binarySearch(small[jacobsthal[i]], sequence);
 		typename T::iterator it = sequence.begin();
 		sequence.insert(it + index, small[jacobsthal[i]]);
-		displayVectors(sequence, small);
-		std::cout << std::endl;
 	}
 	//remove smalls based on jacobsthal sequence vector
 	for (int i = jacobsthal.size() - 1; i >= 0 ; i--)
@@ -175,8 +147,6 @@ void insertSmalls(T & sequence, T & small)
 		typename T::iterator its = small.begin();
 		small.erase(its + jacobsthal[i]);
 	}
-	displayVectors(sequence, small);
-	std::cout << std::endl;
 
 	//insert rest of smalls in reverse order
 	for (int i = small.size() - 1; i >= 0; i--)
@@ -184,60 +154,55 @@ void insertSmalls(T & sequence, T & small)
 		int index = binarySearch(small[i], sequence);
 		typename T::iterator it = sequence.begin();
 		sequence.insert(it + index, small[i]);
-		displayVectors(sequence, small);
-		std::cout << std::endl;
 	}
 	small.clear();
-	displayVectors(sequence, small);
 }
 
-void PmergeMe::algo(std::string str)
+void PmergeMe::algo(char **argv)
 {
-	this->fillSequence(str);
-	if (this->sequenceV.size() == 0)
+	this->fillSequence(argv);
+	if (this->sequenceV.size() < 2)
 	{
 		std::cerr << "Error" << std::endl;
 		return;
 	}
-	if (this->sequenceV.size() == 1)
-	{
-		displayVectors(this->sequenceV, this->smallV);
-		displayVectors(this->sequenceD, this->smallD);
-		return;
-	}
+
+	std::cout << "Before : ";
+	displaySequence(this->sequenceV);
+
+	clock_t start, end;
+	double time;
 	//--------------VECTORS--------------
-	displayVectors(this->sequenceV, this->smallV);
-	std::cout << std::endl;
-	
 	//create pairs and put lowers and biggests numbers in their vectors
+	start = clock();
 	createPairs(this->sequenceV, this->pairsV, this->smallV);
 	comparePairs(this->sequenceV, this->pairsV, this->smallV);
-	displayVectors(this->sequenceV, this->smallV);
 
 	//sort sequence recursively until there is only the biggest number in it
 	sortSequence(this->sequenceV, this->pairsV, this->smallV);
 
-	std::cout << std::endl;
-
 	//insert numbers from small into sequence
 	insertSmalls(this->sequenceV, this->smallV);
+	std::cout << "After :  ";
+	displaySequence(this->sequenceV);
 
-
+	end = clock();
+	time = static_cast<double>((end - start)) / CLOCKS_PER_SEC * 1000;
+	std::cout << "Time to process a range of 5 elements with std::vector : " << std::fixed << std::setprecision(5) << time << " ms" << std::endl;
 	//-------------DEQUE--------------
-	displayVectors(this->sequenceV, this->smallV);
-	std::cout << std::endl;
-	
 	//create pairs and put lowers and biggests numbers in their vectors
+	start = clock();
 	createPairs(this->sequenceD, this->pairsD, this->smallD);
 	comparePairs(this->sequenceD, this->pairsD, this->smallD);
-	displayVectors(this->sequenceD, this->smallD);
 
 	//sort sequence recursively until there is only the biggest number in it
 	sortSequence(this->sequenceD, this->pairsD, this->smallD);
 
-	std::cout << std::endl;
-
 	//insert numbers from small into sequence
 	insertSmalls(this->sequenceD, this->smallD);
+	displaySequence(this->sequenceV);
 
+	end = clock();
+	time = static_cast<double>((end - start)) / CLOCKS_PER_SEC * 1000;
+	std::cout << "Time to process a range of 5 elements with std::deque : " << std::fixed << std::setprecision(5) << time << " ms" << std::endl;
 }
